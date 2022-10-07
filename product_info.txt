@@ -1,0 +1,209 @@
+db.products.insertMany([
+    {
+        "id":"1",
+        "product_name":"Cactus Toy",
+        "product_price":799,
+        "product_material:"Cotton",
+        "product_color:Green"",
+        "isdelete":"false"
+    },
+    {
+        "id":"2",
+        "product_name":"Logitech Stero headset",
+        "product_price":699,
+        "product_material:"Foam",
+        "product_color:"Black",
+        "isdelete":"false"
+    },
+    {
+        "id":"3",
+        "product_name":"Chopra Fashion Sandal",
+        "product_price":549,
+        "product_material:"Faux Leather,Synthetic,Rubber",
+        "product_color:"Brown",
+        "isdelete":"false"
+    },
+    {
+        "id":"4",
+        "product_name":"Fleximaa women Hoodies",
+        "product_price":636,
+        "product_material:"Cotton",
+        "product_color:"Red",
+        "isdelete":"false"
+    },
+    {
+        "id":"5",
+        "product_name":"Signoraware",
+        "product_price":130,
+        "product_material:"Stainless Steel",
+        "product_color:"Red",
+        "isdelete":"false"
+    },
+    {
+        "id":"6",
+        "product_name":"Amazon Brand mobile cover",
+        "product_price":199,
+        "product_material:"Plastic",
+        "product_color:"Blue",
+        "isdelete":"false"
+    },
+    {
+        "id":"7",
+        "product_name":"AMOR Glass vase for Decor",
+        "product_price":299,
+        "product_material:"Glass",
+        "product_color:"Amber",
+        "isdelete":"false"
+    },
+    {
+        "id":"8",
+        "product_name":"Gala floor cleaning cloth",
+        "product_price":199,
+        "product_material:"Microfiber",
+        "product_color:"white",
+        "isdelete":"false"
+    },
+    {
+        "id":"9",
+        "product_name":"Fasttrack Watch",
+        "product_price":765,
+        "product_material:"Silicon",
+        "product_color:"Black",
+        "isdelete":"false"
+    },
+    {
+        "id":"10",
+        "product_name":"Beat XP",
+        "product_price":199,
+        "product_material:"Polyvinyl Chloride",
+        "product_color:"White",
+        "isdelete":"false"
+    },
+    {
+        "id":"11",
+        "product_name":"Milton water bottle",
+        "product_price":738,
+        "product_material:"Copper",
+        "product_color:"Copper",
+        "isdelete":"false"
+    },
+    {
+        "id":"12",
+        "product_name":"Lymio",
+        "product_price":492.00,
+        "product_material:"Chiffon",
+        "product_color:"Indigo",
+        "isdelete":"false"
+    },
+    {
+        "id":"13",
+        "product_name":"LEMBAR",
+        "product_price":649,
+        "product_material:"Plastic",
+        "product_color:"Pink",
+        "isdelete":"false"
+    },
+    {
+        "id":"14",
+        "product_name":"Babique",
+        "product_price":166,
+        "product_material:"Soft",
+        "product_color:"Yellow",
+        "isdelete":"false"
+    },
+    {
+        "id":"15",
+        "product_name":"RiaTech",
+        "product_price":189,
+        "product_material:"Rubber",
+        "product_color:"Black",
+        "isdelete":"false"
+    },
+    {
+        "id":"16",
+        "product_name":"Webby Elephant Toy",
+        "product_price":199,
+        "product_material:"Soft",
+        "product_color:"Grey",
+        "isdelete":"false"
+    },
+    {
+        "id":"17",
+        "product_name":"Adidas,
+        "product_price":700,
+        "product_material:"Mesh",
+        "product_color:"Black",
+        "isdelete":"false"
+    },
+    {
+        "id":"18",
+        "product_name":"CADBURY Celebrations",
+        "product_price":330,
+        "product_material:"Chocolate",
+        "product_color:"Purple",
+        "isdelete":"false"
+    },
+    {
+        "id":"19",
+        "product_name":"RENEE",
+        "product_price":199,
+        "product_material:"liquid",
+        "product_color:"Blue",
+        "isdelete":"false"
+    },
+    {
+        "id":"20",
+        "product_name":"Prima Baby desh chair",
+        "product_price":749,
+        "product_material:"Plastic",
+        "product_color:"Green",
+        "isdelete":"false"
+    },
+  
+
+])
+
+1.Find all the information about each products
+
+db.products.find({},{"_id":0})
+
+2.Find the product price which are between 400 to 800
+
+db.products.find({$and:[{product_price:{$gt:400}},{product_price:{$lt:800}}]})
+
+3.Find the product price which are not between 400 to 600
+
+db.products.find({product_price:{$ne:[{$and:[{product_price:{$gt:400}},{product_price:{$lt:800}}]}]}})
+
+4.List the four product which are grater than 500 in price
+
+db.products.find({product_price:{$gt:500}})
+
+5.Find the product name and product material of each products
+
+db.products.find({},{"product_name":1,"product_material":1,"_id":0})
+
+6.Find the product with a row id of 10
+
+db.products.findOne({id:"10"})
+
+7.Find only the product name and product material
+
+db.products.find({},{"product_name":1,"product_material":1 , "_id":0})
+
+8.Find all products which contain the value of soft in product material 
+
+db.products.find({product_material:"Soft"})
+
+9.Find products which contain product color indigo  and product price 492.00
+
+db.products.find({$or:[{product_color:"indigo"},{product_price:492.00}]})
+
+10.Delete the products which product price value are same
+
+db.products_db.find({},{ product_price: 1}).sort({ _id: 1 }).forEach(function(p) {
+    db.products_db.remove({
+        _id: {  $gt : p._id },
+        "product_price": p.product_price
+    })
+})
